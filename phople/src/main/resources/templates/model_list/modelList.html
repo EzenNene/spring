@@ -6,8 +6,8 @@
 <head>
 <title>포플</title>
 <meta charset="utf-8" />
-
 </head>
+
 <body layout:fragment="content" class="is-preload">
 
 	<!-- Wrapper -->
@@ -20,25 +20,25 @@
 				소중한 지금 이 순간을<br /> 담고싶은 당신을 위해.
 			</p>
 			<ul class="actions">
-				<li><a href="#header"
-					class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+				<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 			</ul>
 		</div>
 
 		<!-- Header -->
 		<header id="header">
-			<a href="index.html" class="logo">PHOPLE</a>
+			<a href="modelList/list" class="logo">PHOPLE</a>
 		</header>
 
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li><a href="main">Photographer List</a></li>
+				<li><a href="/main">Photographer List</a></li>
 				<li class="active"><a href="modellist">Model List</a></li>
-				<li><a href="ppportfolio">My Portfolio</a></li>
-				<li><a href="ppreservation">My Reservation</a></li>
-				<li><a href="signup">SIGN UP</a></li>
-				<li><a href="login">LOGIN</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="ppportfolio">My Portfolio</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="reservation">My Reservation</a></li>
+				<li sec:authorize="isAnonymous()"><a href="members/new">SIGN UP</a></li>
+				<li sec:authorize="isAnonymous()"><a href="members/login">LOGIN</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="members/logout">LOGOUT</a></li>
 			</ul>
 			<ul class="icons">
 				<li><a href="https://www.instagram.com/"
@@ -74,7 +74,7 @@
 							<a href="#">Hong gildong</a>
 						</h2>
 					</header>
-					<a href="#" class="image fit"><img src="images/pic02.jpg"
+					<a href="#" class="image fit"><img src="/images/pic02.jpg"
 						alt="" /></a>
 					<p>Donec eget ex magna. Interdum et malesuada fames ac ante
 						ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet
@@ -90,7 +90,7 @@
 							<a href="#">Yee soonsin</a>
 						</h2>
 					</header>
-					<a href="#" class="image fit"><img src="images/pic03.jpg"
+					<a href="#" class="image fit"><img src="/images/pic03.jpg"
 						alt="" /></a>
 					<p>Donec eget ex magna. Interdum et malesuada fames ac ante
 						ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet
@@ -106,7 +106,7 @@
 							<a href="#">Kin cheolsoo</a>
 						</h2>
 					</header>
-					<a href="#" class="image fit"><img src="images/pic04.jpg"
+					<a href="#" class="image fit"><img src="/images/pic04.jpg"
 						alt="" /></a>
 					<p>Donec eget ex magna. Interdum et malesuada fames ac ante
 						ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet
@@ -122,7 +122,7 @@
 							<a href="#">Kang heejae 
 						</h2>
 					</header>
-					<a href="#" class="image fit"><img src="images/pic05.jpg"
+					<a href="#" class="image fit"><img src="/images/pic05.jpg"
 						alt="" /></a>
 					<p>Donec eget ex magna. Interdum et malesuada fames ac ante
 						ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet
@@ -138,7 +138,7 @@
 							<a href="#">Odio magna 
 						</h2>
 					</header>
-					<a href="#" class="image fit"><img src="images/pic06.jpg"
+					<a href="#" class="image fit"><img src="/images/pic06.jpg"
 						alt="" /></a>
 					<p>Donec eget ex magna. Interdum et malesuada fames ac ante
 						ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet
@@ -154,7 +154,7 @@
 							<a href="#">Augue lorem</a>
 						</h2>
 					</header>
-					<a href="#" class="image fit"><img src="images/pic07.jpg"
+					<a href="#" class="image fit"><img src="/images/pic07.jpg"
 						alt="" /></a>
 					<p>Donec eget ex magna. Interdum et malesuada fames ac ante
 						ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet
@@ -189,13 +189,13 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/jquery.scrollex.min.js"></script>
+	<script src="/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/assets/js/browser.min.js"></script>
+	<script src="/assets/js/breakpoints.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<script src="/assets/js/main.js"></script>
 
 </body>
 </html>

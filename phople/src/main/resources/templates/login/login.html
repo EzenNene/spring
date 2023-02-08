@@ -6,6 +6,37 @@
 <head>
 <title>포플</title>
 <link rel="stylesheet" href="assets/css/main.css" />
+<script type="text/javascript" th:src="@{/js/cookie.js}"></script>
+
+<!-- 각 페이지의 스크립트가 작성될 위치 -->
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		//쿠키를 이용한 아이디 기억
+		$(document).ready(function() {
+			var userInputId = getCookie("userInputId");
+			var setCookieYN = getCookie("setCookieYN");
+
+			if (setCookieYN == 'Y') {
+				$("#id_save").prop("checked", true);
+				$("#email").val(userInputId);
+			} else {
+				$("#id_save").prop("checked", false);
+			}
+
+			//로그인 버튼 클릭
+			$('#loginbtn').click(function() {
+				if ($("#id_save").is(":checked")) {
+					var userInputId = $("#email").val();
+					setCookie("userInputId", userInputId, 60);
+					setCookie("setCookieYN", "Y", 60);
+				} else {
+					deleteCookie("userInputId");
+					deleteCookie("setCookieYN");
+				}
+			});
+		});
+	</script>
+</th:block>
 <meta charset="utf-8" />
 </head>
 <body layout:fragment="content" class="is-preload">
@@ -15,18 +46,19 @@
 
 		<!-- Header -->
 		<header id="header">
-			<a href="index.html" class="logo">PHOPLE</a>
+			<a th:href="@{/main}" class="logo">PHOPLE</a>
 		</header>
 
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li><a href="main">Photographer List</a></li>
-				<li><a href="modellist">Model List</a></li>
-				<li><a href="ppportfolio">My Portfolio</a></li>
-				<li><a href="ppreservation">My Reservation</a></li>
-				<li><a href="signup">SIGN UP</a></li>
-				<li class="active"><a href="/members/login">LOGIN</a></li>
+				<li><a th:href="@{/main}">Photographer List</a></li>
+				<li><a th:href="@{/modellist}">Model List</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="@{/ppportfolio}">My Portfolio</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="@{/reservation}">My Reservation</a></li>
+				<li sec:authorize="isAnonymous()"><a th:href="new">SIGN UP</a></li>
+				<li class="active" sec:authorize="isAnonymous()"><a href="login">LOGIN</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="members/logout">LOGOUT</a></li>
 			</ul>
 			<ul class="icons">
 				<li><a href="https://www.instagram.com/"
@@ -41,32 +73,28 @@
 		<!-- Footer -->
 		<footer id="footer">
 			<section>
-				<form method="post" action="#">
+				<form method="post" role="form" action="/members/login">
 					<div class="fields">
 						<div class="field">
-							<label for="name">ID</label> <input type="text" name="name"
-								id="name" />
+							<label th:for="loginId">ID</label> 
+							<input type="text" name="loginId" id="loginId" />
+							
 						</div>
 						<div class="field">
-							<label for="email">Password</label> <input type="text"
-								name="email" id="email" />
+							<label th:for="password">Password</label> 
+							<input type="text" name="password" id="password" />
 						</div>
 
 						<div class="form-check">
-							<input class="form-check-input" type="radio"
-								name="flexRadioDefault" id="flexRadioDefault1"> <label
-								class="form-check-label" for="flexRadioDefault1">아이디
-								기억하기</label>
+							<input class="form-check-input" type="radio" name="id_save" id="id_save"> 
+							<label class="form-check-label" for="flexRadioDefault1">아이디 기억하기</label>
 						</div>
 
-						<!-- <div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="3"></textarea>
-									</div> -->
 					</div>
 					<ul class="actions">
 						<li><input type="submit" value="Login" /></li>
 					</ul>
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 				</form>
 			</section>
 			<section class="split contact">

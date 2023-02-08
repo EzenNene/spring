@@ -39,12 +39,13 @@
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li><a href="main">Photographer List</a></li>
-				<li><a href="modellist">Model List</a></li>
-				<li class="active"><a href="ppportfolio">My Portfolio</a></li>
-				<li><a href="ppreservation">My Reservation</a></li>
-				<li><a href="signup">SIGN UP</a></li>
-				<li><a href="login">LOGIN</a></li>
+				<li><a th:href="@{/main}">Photographer List</a></li>
+				<li><a th:href="@{/modellist}">Model List</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')" class="active"><a th:href="@{/ppportfolio}">My Portfolio</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a th:href="@{/reservation}">My Reservation</a></li>
+				<li sec:authorize="isAnonymous()"><a href="new">SIGN UP</a></li>
+				<li sec:authorize="isAnonymous()"><a th:href="@{login}">LOGIN</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="members/logout">LOGOUT</a></li>
 			</ul>
 			<ul class="icons">
 				<li><a href="#" class="icon brands fa-instagram"><span

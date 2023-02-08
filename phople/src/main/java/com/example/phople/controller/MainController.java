@@ -22,34 +22,5 @@ public class MainController {
 		return "main";
 	}
 	
-//	@GetMapping(value = "/main")
-//	public String photographerlist() {
-//		return "main";
-//	}
-//	
-//	@GetMapping(value = "/modellist")
-//	public String modellist() {
-//		return "model_list/modellist";
-//	}
-//	
-//	@GetMapping(value = "/ppportfolio")
-//	public String myportfolio() {
-//		return "portfolio/ppportfolio";
-//	}
-//	
-//	@GetMapping(value = "/ppreservation")
-//	public String myreservation() {
-//		return "reservation/ppreservation";
-//	}
-//	
-//	@GetMapping(value = "/signup")
-//	public String signup() {
-//		return "signup/signup";
-//	}
-//	
-//	@GetMapping(value = "/login")
-//	public String login() {
-//		return "login/login";
-//	}
 	
 }

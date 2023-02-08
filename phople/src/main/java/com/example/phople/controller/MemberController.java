@@ -56,7 +56,7 @@ public class MemberController {
 		//로그인 화면 
 		@GetMapping(value = "/login")
 		public String loginMember() {
-			return "main";
+			return "login/login";
 		}
 		
 		

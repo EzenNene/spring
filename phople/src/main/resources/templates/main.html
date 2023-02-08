@@ -19,8 +19,7 @@
 				소중한 지금 이 순간을<br /> 담고싶은 당신을 위해.
 			</p>
 			<ul class="actions">
-				<li><a href="#header"
-					class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+				<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 			</ul>
 		</div>
 
@@ -32,12 +31,13 @@
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li class="active"><a href="main">Photographer List</a></li>
-				<li><a href="modellist">Model List</a></li>
-				<li><a href="ppportfolio">My Portfolio</a></li>
-				<li><a href="reservation">My Reservation</a></li>
-				<li><a href="new">SIGN UP</a></li>
-				<li><a href="login">LOGIN</a></li>
+				<li class="active"><a th:href="main">Photographer List</a></li>
+				<li><a href="/modellist/list">Model List</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="ppportfolio">My Portfolio</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="reservation">My Reservation</a></li>
+				<li sec:authorize="isAnonymous()"><a href="members/new">SIGN UP</a></li>
+				<li sec:authorize="isAnonymous()"><a href="members/login">LOGIN</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="members/logout">LOGOUT</a></li>
 			</ul>
 			<ul class="icons">
 				<li><a href="https://www.instagram.com/"
