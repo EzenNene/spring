@@ -25,18 +25,18 @@
 	<!-- Wrapper -->
 	<div id="wrapper" class="fade-in">
 		<header id="header">
-			<a th:href="@{/main}" class="logo">PHOPLE</a>
+			<a href="/" class="logo">PHOPLE</a>
 		</header>
 		
 		<nav id="nav">
 			<ul class="links">
-				<li><a th:href="@{/main}">Photographer List</a></li>
-				<li><a th:href="@{/modellist}">Model List</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a th:href="@{/ppportfolio}">My Portfolio</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a th:href="@{/reservation}">My Reservation</a></li>
+				<li><a href="/">Photographer List</a></li>
+				<li><a href="/modellist/list">Model List</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="/ppportfolio">My Portfolio</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="/myreservation/reservation">My Reservation</a></li>
 				<li sec:authorize="isAnonymous()" class="active"><a href="new">SIGN UP</a></li>
-				<li sec:authorize="isAnonymous()"><a th:href="@{login}">LOGIN</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="members/logout">LOGOUT</a></li>
+				<li sec:authorize="isAnonymous()"><a href="login">LOGIN</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="/members/logout">LOGOUT</a></li>
 			</ul>
 			<ul class="icons">
 				<li><a href="https://www.instagram.com/"

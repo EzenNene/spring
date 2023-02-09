@@ -40,9 +40,9 @@
 		<nav id="nav">
 			<ul class="links">
 				<li><a th:href="@{/main}">Photographer List</a></li>
-				<li><a th:href="@{/modellist}">Model List</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')" class="active"><a th:href="@{/ppportfolio}">My Portfolio</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a th:href="@{/reservation}">My Reservation</a></li>
+				<li><a th:href="@{/modellist/list}">Model List</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')" class="active"><a th:href="@{/myportfolio/portfolio}">My Portfolio</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a th:href="@{/myreservation/reservation}">My Reservation</a></li>
 				<li sec:authorize="isAnonymous()"><a href="new">SIGN UP</a></li>
 				<li sec:authorize="isAnonymous()"><a th:href="@{login}">LOGIN</a></li>
 				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="members/logout">LOGOUT</a></li>
@@ -84,40 +84,40 @@
 				<div class="box alt">
 					<div class="row gtr-50 gtr-uniform">
 						<div class="col-4">
-							<span class="image fit"><img src="images/pic02.jpg" alt="" /></span>
+							<span class="image fit"><img src="/images/pic02.jpg" alt="" /></span>
 						</div>
 						<div class="col-4">
-							<span class="image fit"><img src="images/pic03.jpg" alt="" /></span>
+							<span class="image fit"><img src="/images/pic03.jpg" alt="" /></span>
 						</div>
 						<div class="col-4">
-							<span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
-						</div>
-						<!-- Break -->
-						<div class="col-4">
-							<span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
-						</div>
-						<div class="col-4">
-							<span class="image fit"><img src="images/pic02.jpg" alt="" /></span>
-						</div>
-						<div class="col-4">
-							<span class="image fit"><img src="images/pic03.jpg" alt="" /></span>
+							<span class="image fit"><img src="/images/pic04.jpg" alt="" /></span>
 						</div>
 						<!-- Break -->
 						<div class="col-4">
-							<span class="image fit"><img src="images/pic03.jpg" alt="" /></span>
+							<span class="image fit"><img src="/images/pic04.jpg" alt="" /></span>
 						</div>
 						<div class="col-4">
-							<span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
+							<span class="image fit"><img src="/images/pic02.jpg" alt="" /></span>
 						</div>
 						<div class="col-4">
-							<span class="image fit"><img src="images/pic02.jpg" alt="" /></span>
+							<span class="image fit"><img src="/images/pic03.jpg" alt="" /></span>
+						</div>
+						<!-- Break -->
+						<div class="col-4">
+							<span class="image fit"><img src="/images/pic03.jpg" alt="" /></span>
+						</div>
+						<div class="col-4">
+							<span class="image fit"><img src="/images/pic04.jpg" alt="" /></span>
+						</div>
+						<div class="col-4">
+							<span class="image fit"><img src="/images/pic02.jpg" alt="" /></span>
 						</div>
 					</div>
 				</div>
 
 				<h3>Left &amp; Right</h3>
 				<p>
-					<span class="image left"><img src="images/pic08.jpg" alt="" /></span>Lorem
+					<span class="image left"><img src="/images/pic08.jpg" alt="" /></span>Lorem
 					ipsum dolor sit accumsan interdum nisi, quis tincidunt felis
 					sagittis eget. tempus euismod. Vestibulum ante ipsum primis in
 					faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat
@@ -133,7 +133,7 @@
 					ipsum primis in faucibus magna blandit adipiscing eu felis iaculis.
 				</p>
 				<p>
-					<span class="image right"><img src="images/pic09.jpg" alt="" /></span>Lorem
+					<span class="image right"><img src="/images/pic09.jpg" alt="" /></span>Lorem
 					ipsum dolor sit accumsan interdum nisi, quis tincidunt felis
 					sagittis eget. tempus euismod. Vestibulum ante ipsum primis in
 					faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat
@@ -236,13 +236,13 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/jquery.scrollex.min.js"></script>
+	<script src="/assets/js/jquery.scrolly.min.js"></script>
+	<script src="/assets/js/browser.min.js"></script>
+	<script src="/assets/js/breakpoints.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<script src="/assets/js/main.js"></script>
 </body>
 
 <script>

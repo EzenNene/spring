@@ -8,12 +8,12 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/myportfolio")
-public class MyportfolioController {
+@RequestMapping("/myreservation")
+public class ReservationController {
 
-	@GetMapping(value = "/portfolio")
+	@GetMapping(value = "/reservation")
 	public String myportfolio() {
-		return "portfolio/ppportfolio";
+		return "reservation/ppreservation";
 	}
 	
 }

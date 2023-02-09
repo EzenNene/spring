@@ -1,5 +1,8 @@
 package com.example.service;
 
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.dto.MainMemberDto;
+import com.example.dto.MemberSearchDto;
 import com.example.entity.Member;
 import com.example.repository.MemberRepository;
 
@@ -47,6 +52,11 @@ public class MemberService implements UserDetailsService { //UserDetailsService:
 		if (findMember != null) {
 			throw new IllegalStateException("이미 가입된 회원입니다.");
 		}
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<MainMemberDto> getMainMemberPage(MemberSearchDto memberSearchDto, Pageable pageable) {
+		return memberRepository.getMainMemberPage(memberSearchDto, pageable);
 	}
 
 }
