@@ -60,6 +60,10 @@ public class Member extends BaseEntity {
 		member.setTel(memberFormDto.getTel());
 		member.setEmail(memberFormDto.getEmail());
 		member.setLoc(memberFormDto.getLoc());
+		
+		member.setInstaSns(memberFormDto.getInstaSns());
+		member.setPhoto(memberFormDto.getPhoto());
+		member.setIntru(memberFormDto.getIntru());
 
 		String password = passwordEncoder.encode(memberFormDto.getPassword());
 		member.setPassword(password);
@@ -67,6 +71,14 @@ public class Member extends BaseEntity {
 		member.setRole(Role.PP);
 
 		return member;
+	}
+	
+	public void updateMember(MemberFormDto memberFormDto) {
+		this.name = memberFormDto.getName();
+		this.photo = memberFormDto.getPhoto();
+		this.intru = memberFormDto.getIntru();
+		this.tel = memberFormDto.getTel();
+		this.instaSns = memberFormDto.getInstaSns();
 	}
 
 }

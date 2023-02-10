@@ -28,10 +28,9 @@ public class MainController {
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 6);
 		Page<MainMemberDto> members = memberService.getMainMemberPage(memberSearchDto, pageable);
 		
-//		model.addAttribute("name", "강희재");
-		
 		model.addAttribute("members", members);
 		model.addAttribute("memberSearchDto", memberSearchDto);
+		model.addAttribute("maxPage", 5);
 		
 		return "main";
 	}

@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/members")
 public class MemberController {
+	
 	private final MemberService memberService;
 	private final PasswordEncoder passwordEncoder;
 	

@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class MainController {
+	
 	private final ItemService itemService;
 	
 	@GetMapping(value = "/")
