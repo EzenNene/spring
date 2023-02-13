@@ -48,6 +48,7 @@
 		<footer id="footer">
 			<section>
 				<form method="post" action="/members/new" th:object="${memberFormDto}">
+				<!-- form submit을 할 때, form의 데이터가 th:object에 설정해준 객체로 받아진다. -->
 					<div class="fields">
 						<div class="field">
 							<label for="loginId">아이디</label> 

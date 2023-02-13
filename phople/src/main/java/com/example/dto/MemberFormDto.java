@@ -40,19 +40,12 @@ public class MemberFormDto {
 	
 	@NotBlank(message = "촬영지역은 필수 입력 값입니다.")
 	private String loc;
-	
-//	원래 수정할 때 넣는건데 가입 시 넣음 ====================================
 
 	private String photo;
 	
 	private String intru;
 	
 	private String instaSns;
-	
-	
-	private List<MemberImgDto> memberImgDtoList = new ArrayList<>(); // 멤버 이미지 정보를 저장하는 리스트
-	
-	private List<Long> memberImgIds = new ArrayList<>(); // 멤버의 이미지 아이디를 저장 -> 수정시에 이미지 아이디를 담아 둘 용도.
 	
 	private static ModelMapper modelMapper = new ModelMapper();
 	

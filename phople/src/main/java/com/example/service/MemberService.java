@@ -6,30 +6,19 @@ import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.constant.Role;
 import com.example.dto.MainMemberDto;
-import com.example.dto.MemberFormDto;
-import com.example.dto.MemberImgDto;
-import com.example.dto.MemberSearchDto;
+import com.example.dto.MemberDto;
+import com.example.dto.PpDto;
 import com.example.entity.Member;
-import com.example.entity.MemberImg;
-import com.example.repository.MemberImgRepository;
 import com.example.repository.MemberRepository;
-
-//import com.wss.constant.Role;
-//import com.wss.dto.BroadFormDto;
-//import com.wss.dto.MemberStreamerDto;
-//import com.wss.entity.Broad;
 
 import lombok.RequiredArgsConstructor;
 
@@ -39,8 +28,6 @@ import lombok.RequiredArgsConstructor;
 public class MemberService implements UserDetailsService { //UserDetailsService: 로그인시 request에서 넘어온 사용자 정보를 받음
 	
 	private final MemberRepository memberRepository; //의존성 주입
-	private final MemberImgService memberImgService;
-	private final MemberImgRepository memberImgRepository;
 	
 	// 로그인
 	@Override
@@ -67,113 +54,37 @@ public class MemberService implements UserDetailsService { //UserDetailsService:
 		}
 	}
 	
+	// 회원가입 테이블에 insert
 	public Member saveMember(Member member) {
 		validateDuplicateMember(member);
 		return memberRepository.save(member); //member 테이블에 insert
 	}
 	
-	public List<MainMemberDto> getMemberBroad(Role role) {
+	public List<PpDto> getMemberBroad(Role role) {
 //		return memberRepository.findByRole(role);
-		List<Member> MemberList = memberRepository.findByRole(role);   //컨트롤러에서 getBroad()사용시 List<Member>를 broad라는 이름으로 다 가져옴.
-		List<MainMemberDto> memberPpDtoList = new ArrayList<>();
+		List<Member> MemberList = memberRepository.findByRole(role); //컨트롤러에서 getBroad()사용시 List<Member>를 broad라는 이름으로 다 가져옴.
+		List<MemberDto> memberDtoList = new ArrayList<>();
 		
 		for(Member member : MemberList) {
-			Broad broad= broadRepository.findByMemberId(member.getId());
-			BroadFormDto broadFormDto = BroadFormDto.of(broad); //broad엔티티를 BroadFormDto로 변경
 			
-			MemberStreamerDto memberStreamerDto = new MemberStreamerDto(member);
-			memberStreamerDto.setBroadFormDto(broadFormDto);
+			MemberDto memberDto = new MemberDto(member);
 			
-			memberStreamerDtoList.add(memberStreamerDto);
+			memberDtoList.add(memberDto);
 		}
 		
-		return memberStreamerDtoList;
+		return memberDtoList;
 	}
-	
-	
 	
 //	=====================================================================================
 	
 	// 멤버 등록
-		public Long saveMember(MemberFormDto memberFormDto, List<MultipartFile> memberImgFileList) throws Exception {
-			
-			// 멤버 등록
-			Member member = memberFormDto.createMember();
-			memberRepository.save(member);
-			
-			//이미지 등록
-			for(int i=0; i<memberImgFileList.size(); i++) {
-				MemberImg memberImg = new MemberImg();
-				memberImg.setMember(member);
-				
-				//첫번째 이미지 일때 대표 상품 이미지 여부 지정
-				if(i == 0) { 
-					memberImg.setRepimgYn("Y");
-				} else {
-					memberImg.setRepimgYn("N");
-				}
-				
-				memberImgService.saveMemberImg(memberImg, memberImgFileList.get(i));
-			}
-			
-				return member.getId();
-		}
-	
-		// 멤버 가져오기
-		@Transactional(readOnly = true) //트랜잭션 읽기 전용(변경감지 수행하지 않음) -> 성능향상
-		public MemberFormDto getMemberDtl(Long memberId) {
-			//1. member_img테이블의 이미지를 가져온다.
-			List<MemberImg> memberImgList = memberImgRepository.findByMemberIdOrderByIdAsc(memberId);
-			List<MemberImgDto> memberImgDtoList = new ArrayList<>();
-			
-			//엔티티 객체 -> dto객체로 변환
-			for(MemberImg memberImg : memberImgList) {
-				MemberImgDto memberImgDto = MemberImgDto.of(memberImg);
-				memberImgDtoList.add(memberImgDto);
-			}
-			
-			//2. member 테이블에 있는 데이터를 가져온다.
-			Member member = memberRepository.findById(memberId)
-					                  .orElseThrow(EntityNotFoundException::new);
-			
-			//엔티티 객체 -> dto객체로 변환
-			MemberFormDto memberFormDto = MemberFormDto.of(member);
-			
-			//상품의 이미지 정보를 넣어준다.
-			memberFormDto.setMemberImgDtoList(memberImgDtoList);
-			
-			return memberFormDto;
-		}
+
 		
-		// 멤버 수정
-		public Long updateMember(MemberFormDto memberFormDto, List<MultipartFile> memberImgFileList) throws Exception {
-			
-			Member member = memberRepository.findById(memberFormDto.getId())
-					.orElseThrow(EntityNotFoundException::new);
-			
-			member.updateMember(memberFormDto);
-			
-			List<Long> memberImgIds = memberFormDto.getMemberImgIds(); //상품 이미지 아이디 리스트를 조회
-			
-			for(int i=0; i<memberImgFileList.size(); i++) {
-				memberImgService.updateMemberImg(memberImgIds.get(i), memberImgFileList.get(i));
-			}
-			
-			return member.getId();
-			
-		}
-		
+	// 멤버 수정
+
 //	========================================================================================
 		
-		//멤버 리스트 가져오기
-		@Transactional(readOnly = true)
-		public Page<Member> getAdminMemberPage(MemberSearchDto memberSearchDto, Pageable pageable) {
-			return memberRepository.getAdminMemberPage(memberSearchDto, pageable);
+		public List<Member> getMainPpList(Role role) {
+			return memberRepository.findByRole(role);
 		}
-		
-		@Transactional(readOnly = true)
-		public Page<MainMemberDto> getMainMemberPage(MemberSearchDto memberSearchDto, Pageable pageable) {
-			return memberRepository.getMainMemberPage(memberSearchDto, pageable);
-		}
-
 }

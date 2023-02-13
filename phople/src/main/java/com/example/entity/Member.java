@@ -28,29 +28,29 @@ public class Member extends BaseEntity {
 	@Id
 	@Column(name = "member_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-
-	private String loginId;
-
-	private String password;
+	private Long memberId;
 
 	@Enumerated(EnumType.STRING)
 	private Role role;
-
+	
 	private String name;
 
 	private String photo;
-
+	
 	private String intru;
-
+	
 	private String tel;
-
+	
 	@Column(unique = true)
 	private String email;
-
+	
 	private String loc;
-
+	
 	private String instaSns;
+	
+	private String loginId;
+
+	private String password;
 
 	public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
 		Member member = new Member();

@@ -27,6 +27,7 @@ public class MainController {
 	public String main(ItemSearchDto itemSearchDto, Optional<Integer> page, Model model) {
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 6);
 		Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
+		// itemService에서 getMainItemPage로 가져온 아이템 정보를 pageable 형식으로 저장
 		
 		model.addAttribute("items", items);
 		model.addAttribute("itemSearchDto", itemSearchDto);

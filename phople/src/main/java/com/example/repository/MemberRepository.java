@@ -20,4 +20,7 @@ public interface MemberRepository extends JpaRepository<Member, Long>,
 	//select * from member where role = ?
 	List<Member> findByRole(Role role);
 	
+	//select * from member where email = ?
+	List<Member> findByEmail(String email);
+	
 }
