@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.constant.Role;
 import com.example.dto.MainMemberDto;
 import com.example.dto.MemberFormDto;
 import com.example.dto.MemberImgDto;
@@ -25,6 +26,10 @@ import com.example.entity.MemberImg;
 import com.example.repository.MemberImgRepository;
 import com.example.repository.MemberRepository;
 
+//import com.wss.constant.Role;
+//import com.wss.dto.BroadFormDto;
+//import com.wss.dto.MemberStreamerDto;
+//import com.wss.entity.Broad;
 
 import lombok.RequiredArgsConstructor;
 
@@ -54,18 +59,37 @@ public class MemberService implements UserDetailsService { //UserDetailsService:
 				.build();
 	}
 	
-	public Member saveMember(Member member) {
-		validateDuplicateMember(member);
-		return memberRepository.save(member); //member 테이블에 insert
-	}
-	
-
+	// 이메일 중복체크 메소드
 	private void validateDuplicateMember(Member member) {
 		Member findMember = memberRepository.findByLoginId(member.getLoginId());
 		if (findMember != null) {
 			throw new IllegalStateException("이미 가입된 회원입니다.");
 		}
 	}
+	
+	public Member saveMember(Member member) {
+		validateDuplicateMember(member);
+		return memberRepository.save(member); //member 테이블에 insert
+	}
+	
+	public List<MainMemberDto> getMemberBroad(Role role) {
+//		return memberRepository.findByRole(role);
+		List<Member> MemberList = memberRepository.findByRole(role);   //컨트롤러에서 getBroad()사용시 List<Member>를 broad라는 이름으로 다 가져옴.
+		List<MainMemberDto> memberPpDtoList = new ArrayList<>();
+		
+		for(Member member : MemberList) {
+			Broad broad= broadRepository.findByMemberId(member.getId());
+			BroadFormDto broadFormDto = BroadFormDto.of(broad); //broad엔티티를 BroadFormDto로 변경
+			
+			MemberStreamerDto memberStreamerDto = new MemberStreamerDto(member);
+			memberStreamerDto.setBroadFormDto(broadFormDto);
+			
+			memberStreamerDtoList.add(memberStreamerDto);
+		}
+		
+		return memberStreamerDtoList;
+	}
+	
 	
 	
 //	=====================================================================================
