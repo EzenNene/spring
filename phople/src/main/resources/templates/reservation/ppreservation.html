@@ -39,7 +39,7 @@
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li><a th:href="@{/main}">Photographer List</a></li>
+				<li><a th:href="@{/}">Photographer List</a></li>
 				<li><a th:href="@{/modellist/list}">Model List</a></li>
 				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a th:href="@{/myportfolio/portfolio}">My Portfolio</a></li>
 				<li sec:authorize="hasAnyAuthority('ROLE_PP')" class="active"><a th:href="@{/myreservation/reservation}">My Reservation</a></li>

@@ -1,5 +1,8 @@
 package com.example.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.constant.Role;
@@ -23,7 +29,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Member extends BaseEntity {
+public class Member extends BaseEntity implements UserDetails{
 
 	@Id
 	@Column(name = "member_id")
@@ -55,15 +61,14 @@ public class Member extends BaseEntity {
 	public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
 		Member member = new Member();
 
-		member.setLoginId(memberFormDto.getLoginId());
 		member.setName(memberFormDto.getName());
+		member.setPhoto(memberFormDto.getPhoto());
+		member.setIntru(memberFormDto.getIntru());
 		member.setTel(memberFormDto.getTel());
 		member.setEmail(memberFormDto.getEmail());
 		member.setLoc(memberFormDto.getLoc());
-		
 		member.setInstaSns(memberFormDto.getInstaSns());
-		member.setPhoto(memberFormDto.getPhoto());
-		member.setIntru(memberFormDto.getIntru());
+		member.setLoginId(memberFormDto.getLoginId());
 
 		String password = passwordEncoder.encode(memberFormDto.getPassword());
 		member.setPassword(password);
@@ -81,4 +86,38 @@ public class Member extends BaseEntity {
 		this.instaSns = memberFormDto.getInstaSns();
 	}
 
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+		auth.add(new SimpleGrantedAuthority(role.toString()));
+		auth.add(new SimpleGrantedAuthority(name.toString()));
+		return auth;
+	}
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return email;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	
 }

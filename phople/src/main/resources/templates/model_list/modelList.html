@@ -34,7 +34,7 @@
 			<ul class="links">
 				<li><a href="/">Photographer List</a></li>
 				<li class="active"><a href="list">Model List</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="ppportfolio">My Portfolio</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="/myportfolio/portfolio">My Portfolio</a></li>
 				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="/myreservation/reservation">My Reservation</a></li>
 				<li sec:authorize="isAnonymous()"><a href="/members/new">SIGN UP</a></li>
 				<li sec:authorize="isAnonymous()"><a href="/members/login">LOGIN</a></li>

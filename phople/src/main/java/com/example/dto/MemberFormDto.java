@@ -47,6 +47,7 @@ public class MemberFormDto {
 	
 	private String instaSns;
 	
+	
 	private static ModelMapper modelMapper = new ModelMapper();
 	
 	public Member createMember() {

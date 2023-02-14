@@ -2,7 +2,10 @@ package com.example.dto;
 
 import java.time.LocalDateTime;
 
+import org.modelmapper.ModelMapper;
+
 import com.example.constant.Role;
+import com.example.entity.Member;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +13,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MemberDto {
-	private Long memberId; // 멤버코드 PK
 	
 	private Role role; // 모델 or 작가
 	
@@ -30,10 +32,10 @@ public class MemberDto {
 	
 	private String loginId; // 로그인아이디
 	
-	private String password; // 비밀번호
+	private static ModelMapper modelMapper = new ModelMapper();
 	
+	public static MemberDto of(Member member) {
+		return modelMapper.map(member, MemberDto.class);
+	}
 	
-	private LocalDateTime regTime; //등록 시간
-
-	private LocalDateTime updateTime; //수정 시간
 }

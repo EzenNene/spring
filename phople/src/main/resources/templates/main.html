@@ -67,8 +67,23 @@
 
 			<!-- Posts -->
 			<section class="posts">
+			<th:block th:each="member : ${members}">
 			
-		
+				<article>
+					<header>
+						<span class="date">[[${member.loc}]]</span>
+						<h2>
+							<a href="#">[[${member.name}]]</a>
+						</h2>
+					</header>
+					<a href="#" class="image fit"><img src="images/pic03.jpg"
+						alt="" /></a>
+					<p>[[${member.intru}]]</p>
+					<ul class="actions special">
+						<li><a href="#" class="button">View Portfolio</a></li>
+					</ul>
+				</article>
+			</th:block>
 			
 				<!-- <article>
 					<header>
@@ -165,17 +180,21 @@
 					<ul class="actions special">
 						<li><a href="#" class="button">View Portfolio</a></li>
 					</ul>
-				</article>
-			</section> -->
+				</article> -->
+			</section> 
 
 			<!-- Footer -->
 			<footer>
 				<div class="pagination">
-					<a href="#" class="previous">Prev</a> <a href="#"
-						class="page active">1</a> <a href="#" class="page">2</a> <a
-						href="#" class="page">3</a> <span class="extra">&hellip;</span> <a
-						href="#" class="page">8</a> <a href="#" class="page">9</a> <a
-						href="#" class="page">10</a> <a href="#" class="next">Next</a>
+					<a href="#" class="previous">Prev</a> 
+					<a href="#" class="page active">1</a> 
+					<a href="#" class="page">2</a> 
+					<a href="#" class="page">3</a>
+					<span class="extra">&hellip;</span> 
+					<a href="#" class="page">8</a> 
+					<a href="#" class="page">9</a> 
+					<a href="#" class="page">10</a> 
+					<a href="#" class="next">Next</a>
 				</div>
 			</footer>
 

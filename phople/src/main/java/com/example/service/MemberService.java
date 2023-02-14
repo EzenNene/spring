@@ -1,10 +1,8 @@
 package com.example.service;
 
 
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,9 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.constant.Role;
-import com.example.dto.MainMemberDto;
 import com.example.dto.MemberDto;
-import com.example.dto.PpDto;
+import com.example.dto.MemberFormDto;
 import com.example.entity.Member;
 import com.example.repository.MemberRepository;
 
@@ -39,11 +36,15 @@ public class MemberService implements UserDetailsService { //UserDetailsService:
 		}
 		
 		//userDetails의 객체를 반환
-		return User.builder()
-				.username(member.getLoginId())
-				.password(member.getPassword())
-				.roles(member.getRole().toString())
-				.build();
+//		return User.builder()
+//				.username(member.getLoginId())
+//				.password(member.getPassword())
+//				.roles(member.getRole().toString())
+//				.build();
+		
+		return member;
+		
+		
 	}
 	
 	// 이메일 중복체크 메소드
@@ -60,21 +61,7 @@ public class MemberService implements UserDetailsService { //UserDetailsService:
 		return memberRepository.save(member); //member 테이블에 insert
 	}
 	
-	public List<PpDto> getMemberBroad(Role role) {
-//		return memberRepository.findByRole(role);
-		List<Member> MemberList = memberRepository.findByRole(role); //컨트롤러에서 getBroad()사용시 List<Member>를 broad라는 이름으로 다 가져옴.
-		List<MemberDto> memberDtoList = new ArrayList<>();
-		
-		for(Member member : MemberList) {
-			
-			MemberDto memberDto = new MemberDto(member);
-			
-			memberDtoList.add(memberDto);
-		}
-		
-		return memberDtoList;
-	}
-	
+
 //	=====================================================================================
 	
 	// 멤버 등록
@@ -84,7 +71,13 @@ public class MemberService implements UserDetailsService { //UserDetailsService:
 
 //	========================================================================================
 		
+	// role 에 따라 전체 멤버 불러오기
 		public List<Member> getMainPpList(Role role) {
 			return memberRepository.findByRole(role);
+		}
+		
+		public MemberDto findUserDetail(String id) {
+			Member member = memberRepository.findByLoginId(id);
+			return MemberDto.of(member);
 		}
 }

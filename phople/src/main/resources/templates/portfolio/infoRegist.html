@@ -33,19 +33,19 @@
 
 		<!-- Header -->
 		<header id="header">
-			<a href="index.html" class="logo">PHOPLE</a>
+			<a href="/" class="logo">PHOPLE</a>
 		</header>
 
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li><a th:href="@{/main}">Photographer List</a></li>
+				<li><a th:href="@{/}">Photographer List</a></li>
 				<li><a th:href="@{/modellist/list}">Model List</a></li>
 				<li sec:authorize="hasAnyAuthority('ROLE_PP')" class="active"><a th:href="@{/myportfolio/portfolio}">My Portfolio</a></li>
 				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a th:href="@{/myreservation/reservation}">My Reservation</a></li>
 				<li sec:authorize="isAnonymous()"><a href="new">SIGN UP</a></li>
 				<li sec:authorize="isAnonymous()"><a th:href="@{login}">LOGIN</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="members/logout">LOGOUT</a></li>
+				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="/members/logout">LOGOUT</a></li>
 			</ul>
 			<ul class="icons">
 				<li><a href="#" class="icon brands fa-instagram"><span
@@ -54,16 +54,13 @@
 						class="label">GitHub</span></a></li>
 			</ul>
 		</nav>
-
+		
+		<form class="row g-3" role="form" method="post" enctype="multipart/form-data" th:object="${MemberFormDto}">
 		<!-- Main -->
-		<form role="form" method="post" enctype="multipart/form-data" th:object="${memberRegistDto}">
 		<div id="main">
-
+	
 			<!-- Post -->
 			<section class="post">
-
-			
-			<input type="hidden" th:field="*{id}" />
 
 				<div class="box1" style="background: #BDBDBD;">
 					<img class="profile" src="/images/ex1.JPG">
@@ -77,10 +74,9 @@
 
 				<h2>소개</h2>
 				<p>
-					서울/경기권에서 촬영활동을 하는 홍길동입니다. 상업촬영 위주로 하고있습니다.
+					<span class="input-group-text">간단한 소개</span>
+  					<input type="text" class="form-control" th:field="*{intru}" placeholder="간단한 소개 입력">
 				</p>
-					<span class="input-group-text">상품명</span>
-  					<input type="text" class="form-control" th:field="*{itemNm}" placeholder="상품명 입력">
 				<hr />
 
 				<!-- Image -->
@@ -131,67 +127,17 @@
 					</div>
 				</div>
 				
-						<!-- 등록할때 -->
-						<div th:if="${#lists.isEmpty(itemFormDto.itemImgDtoList)}">
-							<div th:each="num: ${#numbers.sequence(1,5)}">
-								<div class="mb-3">
-  									<label for="formFile" class="form-label custom-file-label" th:text="상품이미지 + ${num}"></label>
-  									<input class="form-control custom-file-input" type="file" id="itemImgFile" name="itemImgFile">
-								</div>
-							</div>
-						</div>
+				
 
 				<h3>Left &amp; Right</h3>
 				<p>
-					<span class="image left"><img src="/images/pic08.jpg" alt="" /></span>Lorem
-					ipsum dolor sit accumsan interdum nisi, quis tincidunt felis
-					sagittis eget. tempus euismod. Vestibulum ante ipsum primis in
-					faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat
-					ac adipiscing accumsan eu faucibus. Integer ac pellentesque
-					praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum
-					ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante
-					ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis
-					iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac
-					pellentesque praesent tincidunt felis sagittis eget. tempus
-					euismod. Vestibulum ante ipsum primis in faucibus vestibulum.
-					Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan
-					eu faucibus. Integer ac pellentesque praesent. Vestibulum ante
-					ipsum primis in faucibus magna blandit adipiscing eu felis iaculis.
+					<span class="image left"><img src="/images/pic08.jpg" alt="" /></span>
+					123
 				</p>
 				<p>
-					<span class="image right"><img src="/images/pic09.jpg" alt="" /></span>Lorem
-					ipsum dolor sit accumsan interdum nisi, quis tincidunt felis
-					sagittis eget. tempus euismod. Vestibulum ante ipsum primis in
-					faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat
-					ac adipiscing accumsan eu faucibus. Integer ac pellentesque
-					praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum
-					ante ipsum primis sagittis eget. tempus euismod. Vestibulum ante
-					ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis
-					iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac
-					pellentesque praesent tincidunt felis sagittis eget. tempus
-					euismod. Vestibulum ante ipsum primis in faucibus vestibulum.
-					Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan
-					eu faucibus. Integer ac pellentesque praesent. Vestibulum ante
-					ipsum primis in faucibus magna blandit adipiscing eu felis iaculis.
+					<span class="image right"><img src="/images/pic09.jpg" alt="" /></span>
+					123
 				</p>
-
-				<hr />
-
-				<div class="input-group mb-3">
-  					<span class="input-group-text">left</span>
-  					<div class="form-floating">
-  						<textarea class="form-control" placeholder="상품 상세내용" th:field="*{itemDetail}" id="floatingTextarea"></textarea>
-  						<label for="floatingTextarea">left</label>
-					</div>
-				</div>
-				
-				<div class="input-group mb-3">
-  					<span class="input-group-text">right</span>
-  					<div class="form-floating">
-  						<textarea class="form-control" placeholder="상품 상세내용" th:field="*{itemDetail}" id="floatingTextarea"></textarea>
-  						<label for="floatingTextarea">right</label>
-					</div>
-				</div>
 
 				<hr />
 
@@ -227,7 +173,8 @@
 					</dd>
 				</dl>
 		
-				</form>
+		</form>
+				<!-- </form> -->
 		
 				<hr />
 				<!-- Blockquote -->
@@ -265,6 +212,8 @@
 				</form>
 
 				<hr />
+				
+		<a href="/myportfolio/portfolioEdit" class="button">수정저장</a>
 
 			</section>
 		</div>
@@ -279,6 +228,7 @@
 				<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
 			</ul>
 		</div>
+
 
 	</div>
 

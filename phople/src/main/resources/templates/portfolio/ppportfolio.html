@@ -33,13 +33,13 @@
 
 		<!-- Header -->
 		<header id="header">
-			<a href="index.html" class="logo">PHOPLE</a>
+			<a href="/" class="logo">PHOPLE</a>
 		</header>
 
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li><a th:href="@{/main}">Photographer List</a></li>
+				<li><a th:href="@{/}">Photographer List</a></li>
 				<li><a th:href="@{/modellist/list}">Model List</a></li>
 				<li sec:authorize="hasAnyAuthority('ROLE_PP')" class="active"><a th:href="@{/myportfolio/portfolio}">My Portfolio</a></li>
 				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a th:href="@{/myreservation/reservation}">My Reservation</a></li>
@@ -66,7 +66,7 @@
 				</div>
 
 				<header class="major">
-					<h1>Hong gildong 작가님</h1>
+					<h1 th:text="${memberDto.name}"></h1>
 				</header>
 
 				<!-- Text stuff -->
@@ -219,6 +219,8 @@
 				</form>
 
 				<hr />
+
+			<a href="/myportfolio/portfolioEdit" class="button">수정하기</a>
 
 			</section>
 		</div>
