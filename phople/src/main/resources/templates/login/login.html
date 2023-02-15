@@ -54,11 +54,11 @@
 			<ul class="links">
 				<li><a href="/">Photographer List</a></li>
 				<li><a href="/modellist/list">Model List</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="/ppportfolio">My Portfolio</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="/myreservation/reservation">My Reservation</a></li>
+				<li sec:authorize="hasAnyAuthority('PP')"><a href="/ppportfolio">My Portfolio</a></li>
+				<li sec:authorize="hasAnyAuthority('PP')"><a href="/myreservation/reservation">My Reservation</a></li>
 				<li sec:authorize="isAnonymous()"><a href="new">SIGN UP</a></li>
 				<li class="active" sec:authorize="isAnonymous()"><a href="login">LOGIN</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="members/logout">LOGOUT</a></li>
+				<li sec:authorize="hasAnyAuthority('PP')"><a href="/members/logout">LOGOUT</a></li>
 			</ul>
 			<ul class="icons">
 				<li><a href="https://www.instagram.com/"
@@ -143,6 +143,7 @@
 				<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
 			</ul>
 		</div>
+
 
 	</div>
 

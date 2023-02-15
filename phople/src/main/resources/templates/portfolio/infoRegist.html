@@ -39,13 +39,13 @@
 		<!-- Nav -->
 		<nav id="nav">
 			<ul class="links">
-				<li><a th:href="@{/}">Photographer List</a></li>
-				<li><a th:href="@{/modellist/list}">Model List</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')" class="active"><a th:href="@{/myportfolio/portfolio}">My Portfolio</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a th:href="@{/myreservation/reservation}">My Reservation</a></li>
+				<li><a href="/">Photographer List</a></li>
+				<li><a href="/modellist/list">Model List</a></li>
+				<li sec:authorize="hasAnyAuthority('PP')" class="active"><a href="/myportfolio/portfolio">My Portfolio</a></li>
+				<li sec:authorize="hasAnyAuthority('PP')"><a href="/myreservation/reservation">My Reservation</a></li>
 				<li sec:authorize="isAnonymous()"><a href="new">SIGN UP</a></li>
-				<li sec:authorize="isAnonymous()"><a th:href="@{login}">LOGIN</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="/members/logout">LOGOUT</a></li>
+				<li sec:authorize="isAnonymous()"><a href="login">LOGIN</a></li>
+				<li sec:authorize="hasAnyAuthority('PP')"><a href="/members/logout">LOGOUT</a></li>
 			</ul>
 			<ul class="icons">
 				<li><a href="#" class="icon brands fa-instagram"><span
@@ -54,169 +54,176 @@
 						class="label">GitHub</span></a></li>
 			</ul>
 		</nav>
-		
-		<form class="row g-3" role="form" method="post" enctype="multipart/form-data" th:object="${MemberFormDto}">
+
 		<!-- Main -->
 		<div id="main">
-	
-			<!-- Post -->
-			<section class="post">
+				<!-- Post -->
+				<section class="post">
 
-				<div class="box1" style="background: #BDBDBD;">
-					<img class="profile" src="/images/ex1.JPG">
-				</div>
-
-				<header class="major">
-					<h1>Hong gildong 작가님</h1>
-				</header>
-
-				<!-- Text stuff -->
-
-				<h2>소개</h2>
-				<p>
-					<span class="input-group-text">간단한 소개</span>
-  					<input type="text" class="form-control" th:field="*{intru}" placeholder="간단한 소개 입력">
-				</p>
-				<hr />
-
-				<!-- Image -->
-				<h2>Portfolio</h2>
-
-				<span class="image fit"><img src="images/pic01.jpg" alt="" /></span>
-				<div class="box alt">
-					<div class="row gtr-50 gtr-uniform">
-					
-						<div class="col-4">
-							<span class="image fit"><img src="/images/pic02.jpg" alt="" /></span>
-						</div>
-						
-						<div class="col-4">
-							<span class="image fit"><img src="/images/pic03.jpg" alt="" /></span>
-						</div>
-						
-						<div class="col-4">
-							<span class="image fit"><img src="/images/pic04.jpg" alt="" /></span>
-						</div>
-						
-						<!-- Break -->
-						<div class="col-4">
-							<span class="image fit"><img src="/images/pic04.jpg" alt="" /></span>
-						</div>
-						
-						<div class="col-4">
-							<span class="image fit"><img src="/images/pic02.jpg" alt="" /></span>
-						</div>
-						
-						<div class="col-4">
-							<span class="image fit"><img src="/images/pic03.jpg" alt="" /></span>
-						</div>
-						
-						<!-- Break -->
-						<div class="col-4">
-							<span class="image fit"><img src="/images/pic03.jpg" alt="" /></span>
-						</div>
-						
-						<div class="col-4">
-							<span class="image fit"><img src="/images/pic04.jpg" alt="" /></span>
-						</div>
-						
-						<div class="col-4">
-							<span class="image fit"><img src="/images/pic02.jpg" alt="" /></span>
-						</div>
-						
+					<div class="box1" style="background: #BDBDBD;">
+						<img class="profile" src="/images/ex1.JPG">
 					</div>
-				</div>
-				
-				
 
-				<h3>Left &amp; Right</h3>
-				<p>
-					<span class="image left"><img src="/images/pic08.jpg" alt="" /></span>
-					123
-				</p>
-				<p>
-					<span class="image right"><img src="/images/pic09.jpg" alt="" /></span>
-					123
-				</p>
+					<header class="major">
+						<h1 th:text="${memberDto.name}"></h1>
+					</header>
 
-				<hr />
+					<!-- Text stuff -->
+			<form class="row g-3" role="form" method="post" action ="/myportfolio/portfolioEdit" enctype="multipart/form-data" th:object="${memberFormDto}">
 
-				<!-- Lists -->
-				<div class="row">
-					<div class="col-6 col-12-small">
-						<h3>Photographer SNS</h3>
-						<ul class="icons">
-							<!-- <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<h2>소개</h2>
+					<p>
+						<span class="input-group-text">간단한 소개</span>
+						<input type="text" class="form-control" th:field="*{intru}" placeholder="간단한 소개 입력">
+					</p>
+					<hr />
+					<!-- <input type="hidden" th:filed="*{id}" th:value="${memberDto.id}"> -->
+					<!-- Image -->
+					<h2>Portfolio</h2>
+
+					<span class="image fit"><img src="images/pic01.jpg" alt="" /></span>
+					<div class="box alt">
+						<div class="row gtr-50 gtr-uniform">
+
+							<div class="col-4">
+								<span class="image fit"><img src="/images/pic02.jpg"
+									alt="" /></span>
+							</div>
+
+							<div class="col-4">
+								<span class="image fit"><img src="/images/pic03.jpg"
+									alt="" /></span>
+							</div>
+
+							<div class="col-4">
+								<span class="image fit"><img src="/images/pic04.jpg"
+									alt="" /></span>
+							</div>
+
+							<!-- Break -->
+							<div class="col-4">
+								<span class="image fit"><img src="/images/pic04.jpg"
+									alt="" /></span>
+							</div>
+
+							<div class="col-4">
+								<span class="image fit"><img src="/images/pic02.jpg"
+									alt="" /></span>
+							</div>
+
+							<div class="col-4">
+								<span class="image fit"><img src="/images/pic03.jpg"
+									alt="" /></span>
+							</div>
+
+							<!-- Break -->
+							<div class="col-4">
+								<span class="image fit"><img src="/images/pic03.jpg"
+									alt="" /></span>
+							</div>
+
+							<div class="col-4">
+								<span class="image fit"><img src="/images/pic04.jpg"
+									alt="" /></span>
+							</div>
+
+							<div class="col-4">
+								<span class="image fit"><img src="/images/pic02.jpg"
+									alt="" /></span>
+							</div>
+
+						</div>
+					</div>
+
+
+
+					<h3>Left &amp; Right</h3>
+					<p>
+						<span class="image left"><img src="/images/pic08.jpg"
+							alt="" /></span> 123
+					</p>
+					<p>
+						<span class="image right"><img src="/images/pic09.jpg"
+							alt="" /></span> 123
+					</p>
+
+					<hr />
+
+					<!-- Lists -->
+					<div class="row">
+						<div class="col-6 col-12-small">
+							<h3>Photographer SNS</h3>
+							<ul class="icons">
+								<!-- <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 												<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li> -->
-							<li><a href="#" class="icon brands fa-instagram"><span
-									class="label">Instagram</span></a></li>
-							<!-- <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+								<li><a href="#" class="icon brands fa-instagram"><span
+										class="label">Instagram</span></a></li>
+								<!-- <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
 												<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li> -->
-						</ul>
-					</div>
-
-				</div>
-				<hr />
-				<h3>INFO</h3>
-				<dl>
-					<dt>연락처</dt>
-					<dd>
-						<p>010-1111-1111</p>
-					</dd>
-					<dt>이메일</dt>
-					<dd>
-						<p>Hong@email.com</p>
-					</dd>
-					<dt>촬영지역</dt>
-					<dd>
-						<p>서울/경기</p>
-					</dd>
-				</dl>
-		
-		</form>
-				<!-- </form> -->
-		
-				<hr />
-				<!-- Blockquote -->
-				<h2>※ 예약시 주의사항</h2>
-				<blockquote>
-					포플에서의 예약은 상호간 예약이 합의되었다는 명시적<br> 기록을 남겨 노쇼나 사고를 예방함에 있습니다. <br>
-					촬영에 대한 상세한 내용은 <b>개인적으로 작가/모델님과 선 연락</b> 후 <br> 예약을 등록하시길
-					권장합니다. <br> <br> 추후 사용자 신고 및 보증금 기능 도입예정.
-				</blockquote>
-				<hr />
-				<h2>Form</h2>
-
-				<form method="post" action="#">
-					<div class="row gtr-uniform">
-
-						<div>
-							<label for="start">Desired reservation date</label> <input
-								type="date" id="currentDate" name="trip-start" min="2022-12-31"
-								max="2024-12-31">
-						</div>
-
-						<div class="col-12">
-							<textarea name="demo-message" id="demo-message"
-								placeholder="Enter your message" rows="6"></textarea>
-						</div>
-
-						<div class="col-12">
-							<ul class="actions">
-								<li><input type="submit" value="Send Message"
-									class="primary" /></li>
-								<li><input type="reset" value="Reset" /></li>
 							</ul>
 						</div>
+
 					</div>
-				</form>
+					<hr />
+					<h3>INFO</h3>
+					<dl>
+						<dt>연락처</dt>
+						<dd>
+							<p>010-1111-1111</p>
+						</dd>
+						<dt>이메일</dt>
+						<dd>
+							<p>Hong@email.com</p>
+						</dd>
+						<dt>촬영지역</dt>
+						<dd>
+							<p>서울/경기</p>
+						</dd>
+					</dl>
+	
 
-				<hr />
-				
-		<a href="/myportfolio/portfolioEdit" class="button">수정저장</a>
+			<hr />
+			<!-- Blockquote -->
+			<h2>※ 예약시 주의사항</h2>
+			<blockquote>
+				포플에서의 예약은 상호간 예약이 합의되었다는 명시적<br> 기록을 남겨 노쇼나 사고를 예방함에 있습니다. <br>
+				촬영에 대한 상세한 내용은 <b>개인적으로 작가/모델님과 선 연락</b> 후 <br> 예약을 등록하시길
+				권장합니다. <br> <br> 추후 사용자 신고 및 보증금 기능 도입예정.
+			</blockquote>
+			<hr />
+			<h2>Form</h2>
 
+			<!-- <form method="post" action="#"> -->
+				<div class="row gtr-uniform">
+
+					<div>
+						<label for="start">Desired reservation date</label> <input
+							type="date" id="currentDate" name="trip-start" min="2022-12-31"
+							max="2024-12-31">
+					</div>
+
+					<div class="col-12">
+						<textarea name="demo-message" id="demo-message"
+							placeholder="Enter your message" rows="6"></textarea>
+					</div>
+
+					<div class="col-12">
+						<ul class="actions">
+							<li><input type="submit" value="Send Message"
+								class="primary" /></li>
+							<li><input type="reset" value="Reset" /></li>
+						</ul>
+					</div>
+				</div>
+
+			<hr />
+			<button type="submit" class="btn btn-primary mb-3">수정저장</button>
+			<a href="/myportfolio/portfolioEdit" class="button" type="submit">수정저장</a>
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+		</form>
 			</section>
 		</div>
+
 
 		<!-- Footer -->
 

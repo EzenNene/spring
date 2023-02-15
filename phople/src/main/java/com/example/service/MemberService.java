@@ -4,12 +4,15 @@ package com.example.service;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.constant.Role;
 import com.example.dto.MemberDto;
@@ -34,6 +37,8 @@ public class MemberService implements UserDetailsService { //UserDetailsService:
 		if(member == null) {
 			throw new UsernameNotFoundException(loginId);
 		}
+		
+		System.out.println(member.getLoginId());
 		
 		//userDetails의 객체를 반환
 //		return User.builder()
@@ -68,10 +73,21 @@ public class MemberService implements UserDetailsService { //UserDetailsService:
 
 		
 	// 멤버 수정
+	public Long myportfolioEdit(MemberFormDto memberFormDto) throws Exception {
+		
+		Member member = memberRepository.findById(memberFormDto.getId())
+				.orElseThrow(EntityNotFoundException::new);
+		
+		member.updateMember(memberFormDto);
+
+		return member.getMemberId();
+		
+	}
+	
 
 //	========================================================================================
 		
-	// role 에 따라 전체 멤버 불러오기
+	// (메인페이지) role 에 따라 전체 멤버 불러오기
 		public List<Member> getMainPpList(Role role) {
 			return memberRepository.findByRole(role);
 		}

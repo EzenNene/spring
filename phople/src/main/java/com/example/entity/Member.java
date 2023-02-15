@@ -96,7 +96,7 @@ public class Member extends BaseEntity implements UserDetails{
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return email;
+		return loginId;
 	}
 	@Override
 	public boolean isAccountNonExpired() {

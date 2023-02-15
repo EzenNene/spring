@@ -41,11 +41,11 @@
 			<ul class="links">
 				<li><a th:href="@{/}">Photographer List</a></li>
 				<li><a th:href="@{/modellist/list}">Model List</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a th:href="@{/myportfolio/portfolio}">My Portfolio</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')" class="active"><a th:href="@{/myreservation/reservation}">My Reservation</a></li>
+				<li sec:authorize="hasAnyAuthority('PP')"><a th:href="@{/myportfolio/portfolio}">My Portfolio</a></li>
+				<li sec:authorize="hasAnyAuthority('PP')" class="active"><a th:href="@{/myreservation/reservation}">My Reservation</a></li>
 				<li sec:authorize="isAnonymous()"><a href="new">SIGN UP</a></li>
 				<li sec:authorize="isAnonymous()"><a th:href="@{login}">LOGIN</a></li>
-				<li sec:authorize="hasAnyAuthority('ROLE_PP')"><a href="/members/logout">LOGOUT</a></li>
+				<li sec:authorize="hasAnyAuthority('PP')"><a href="/members/logout">LOGOUT</a></li>
 			</ul>
 			<ul class="icons">
 				<li><a href="#" class="icon brands fa-instagram"><span
